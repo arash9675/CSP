@@ -1,0 +1,6 @@
+C:\Users\CaptainEricCartman\Desktop\AI\CSP\CSP\bin\Debug\CSP.exe.config
+C:\Users\CaptainEricCartman\Desktop\AI\CSP\CSP\bin\Debug\CSP.exe
+C:\Users\CaptainEricCartman\Desktop\AI\CSP\CSP\bin\Debug\CSP.pdb
+C:\Users\CaptainEricCartman\Desktop\AI\CSP\CSP\obj\Debug\CSP.csprojResolveAssemblyReference.cache
+C:\Users\CaptainEricCartman\Desktop\AI\CSP\CSP\obj\Debug\CSP.exe
+C:\Users\CaptainEricCartman\Desktop\AI\CSP\CSP\obj\Debug\CSP.pdb

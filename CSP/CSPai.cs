@@ -21,6 +21,7 @@ namespace CSP
                         count[i]++;
                     }
             }
+            
             return count;
         }
         public void MRV() 
@@ -36,22 +37,32 @@ namespace CSP
         
         public void CreatingSit() 
         {
-           // return AnimalsFirstSit();
+            List<Cages> cagesList = new List<Cages>(CagesFirstSit());
+            List<Animals> animalsList = new List<Animals>(AnimalsFirstSit());
+            cagesList.ElementAt(5).animalInIt = animalsList.ElementAt(1);
+            foreach (var animal in animalsList) { Console.WriteLine(animal.AvailableDomainCount(cagesList)); }
+
+            int a;
+
+        }
+
+        private static List<Cages> CagesFirstSit()
+        {
             Inputs a = new Inputs();
             List<Cages> cagesList = new List<Cages>();
-            for (int i = 0; i < a.nCages; i++) 
+            for (int i = 0; i < a.nCages; i++)
             {
                 cagesList.Add(new Cages());
                 cagesList.ElementAt(i).size = a.cagesSize[i];
-                
+
             }
             for (int i = 0; i < cagesList.Count(); i++)
             {
                 for (int j = 0; j < a.cagesBouring.GetLength(0); j++)
                 {
-                    for (int z = 0; z < 2; z++) 
+                    for (int z = 0; z < 2; z++)
                     {
-                        if (a.cagesBouring[j, z] == i + 1) 
+                        if (a.cagesBouring[j, z] == i + 1)
                         {
                             if (z == 0) cagesList.ElementAt(i).adjacent.Add(cagesList.ElementAt((a.cagesBouring[j, 1]) - 1));
                             else cagesList.ElementAt(i).adjacent.Add(cagesList.ElementAt((a.cagesBouring[j, 0]) - 1));
@@ -60,7 +71,7 @@ namespace CSP
                 }
 
             }
-
+            return cagesList;
         }
 
         private static List<Animals> AnimalsFirstSit()

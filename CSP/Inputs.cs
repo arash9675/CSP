@@ -8,7 +8,7 @@ namespace CSP
 {
     public class Inputs
     {
-        public  int nCages;
+        public int nCages;
         public int nAnimals;
         public int nBouring;
         public int[] cagesSize;
@@ -47,14 +47,69 @@ namespace CSP
             neighbourAllow = new List<Animals>();
             //domain = new int[20];
         }
+        public int DomainCount() 
+        {
+            int temp = 0;
+            for (int i = 0; i < this.domain.Count(); i++) 
+            {
+                if (this.domain[i] == 1) temp++;
+            }
+            return temp;
+        }
+        public List<Cages> AvailableDomains(List<Cages> cages)
+        {
+            //Inputs a=new Inputs();
+            List<Cages> tempCages = new List<Cages>(cages);
+            for (int i = tempCages.Count() - 1; i >= 0; i--)
+            {
+                if (tempCages.ElementAt(i).size < this.size) tempCages.RemoveAt(i);
+            }
+
+
+            for (int i = tempCages.Count() - 1; i >= 0; i--)
+            {
+                if (tempCages.ElementAt(i).animalInIt != null) tempCages.RemoveAt(i);
+            }
+
+            for (int i = tempCages.Count() - 1; i >= 0; i--)
+            {
+                bool deleted = false;
+                for (int j = tempCages.ElementAt(i).adjacent.Count() - 1; j >= 0; j--) 
+                {
+                    int flag = 0;
+                    if (tempCages.ElementAt(i).adjacent.ElementAt(j).animalInIt != null) 
+                    {
+                        foreach (var neigh in this.neighbourAllow) 
+                        {
+                            if (neigh == tempCages.ElementAt(i).adjacent.ElementAt(j).animalInIt) flag = 1;
+                        }
+                        if (flag == 0) 
+                        { tempCages.RemoveAt(i); 
+                            deleted = true; } 
+                    }
+                    if (deleted) break;
+                }
+                
+            }
+
+            return tempCages;
+        }
+
+
+        public int AvailableDomainCount(List<Cages> cages) 
+        {
+            return AvailableDomains(cages).Count();
+        }
     }
     public class Cages 
     {
         public int size;
         public List<Cages> adjacent;
+        public Animals animalInIt;
         public Cages() 
         {
             adjacent = new List<Cages>();
+            animalInIt = null;
         }
     }
 }
